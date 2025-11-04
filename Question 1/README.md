@@ -92,6 +92,79 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 * **OOV handling:** User input tokens not in vocab are mapped to `<unk>`; decoding avoids sampling `<unk>` to keep outputs readable.
 * UX note: CW=3 variant is faster and subjectively as good as CW=5 for both datasets.
 
+* ##Running the Pretrained Models
+
+## 1️⃣ Download Model Checkpoints
+
+All pretrained model checkpoints are hosted on Google Drive:
+🔗 [Download from Google Drive](https://drive.google.com/drive/u/0/folders/1FEKwOQ3dG40Gdk4j_b3Ug5fk3R5PV1b6)
+
+You can either:
+
+* **Manually download** the `.pth` files and place them into the `checkpoints/` folder of this repository,
+  **or**
+* Use the command line (requires `gdown`):
+
+  ```bash
+  pip install gdown
+  gdown --folder https://drive.google.com/drive/folders/1FEKwOQ3dG40Gdk4j_b3Ug5fk3R5PV1b6
+  ```
+
+This will automatically download all checkpoint files into your current working directory.
+
+---
+
+## 2️⃣ Place Checkpoints
+
+Move all downloaded `.pth` files to:
+
+```
+project_root/
+└── apps/
+    ├── model_text.pth
+    ├── model_code.pth
+    └── ...
+```
+
+If your code expects checkpoints in a different folder, update the paths in your `load_model()` function accordingly.
+
+---
+
+## 3️⃣ Install Dependencies
+
+Since project uses PyTorch:
+
+```bash
+pip install torch torchvision torchaudio
+```
+
+And for Streamlit (if running a web app):
+
+```bash
+pip install streamlit
+```
+
+---
+
+## 4️⃣ Run the Application or Model Inference
+
+To launch the Streamlit web app:
+
+```bash
+streamlit run app/app.py
+```
+---
+
+## 5️⃣ (Optional) Modify Configuration
+
+If your model expects configuration data within the checkpoint file, load it as:
+
+```python
+checkpoint = torch.load("checkpoints/model_text.pth", map_location="cpu")
+model = YourModelClass(**checkpoint["config"])
+model.load_state_dict(checkpoint["model_state_dict"])
+model.eval()
+```
 ---
 
 ## 5) Comparative Analysis (Category I vs II)
