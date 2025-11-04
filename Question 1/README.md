@@ -15,14 +15,14 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 ### Linux (code)
 
 **CW=3 (36 epochs)**
-![Linux CW3](Dataset\ 2/L_CW3.png)
+![Linux CW3](Dataset%202/L_CW3.png)
 
 * Train ↓ from ~7.4 → **~4.9**
 * Val ↓ from ~6.5 → **~5.7**
 * Gap small and steady ⇒ good generalization; no late-epoch blow-up.
 
 **CW=5 (35 epochs)**
-![Linux CW5](L_CW5.png)
+![Linux CW5](Dataset%202/L_CW5.png)
 
 * Train ↓ to **~4.85–4.9**
 * Val plateaus **~5.65–5.7**
