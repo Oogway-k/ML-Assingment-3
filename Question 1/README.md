@@ -15,14 +15,12 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 ### Linux (code)
 
 **CW=3 (36 epochs)**
-![Linux CW3](Dataset%202/L_CW3.png)
 
 * Train ↓ from ~7.4 → **~4.9**
 * Val ↓ from ~6.5 → **~5.7**
 * Gap small and steady ⇒ good generalization; no late-epoch blow-up.
 
 **CW=5 (35 epochs)**
-![Linux CW5](Dataset%202/L_CW5.png)
 
 * Train ↓ to **~4.85–4.9**
 * Val plateaus **~5.65–5.7**
@@ -35,19 +33,19 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 ### Shakespeare (text)
 
 **CW=3 (147 epochs)**
-![Shakespeare CW3](S_cw3.png)
 
 * Train converges near **~5.62–5.66**
 * Val stabilizes near **~5.74–5.76**
 * Curves flatten ~30 epochs; long tail of fine-tuning gives tiny gains.
 
 **CW=5 (139 epochs)**
-![Shakespeare CW5](S_cw5.png)
 
 * Train ~**5.60–5.64**, Val ~**5.72–5.75**
 * Practically indistinguishable from CW=3.
 
 **Takeaway (text):** Larger CW does **not** materially reduce validation loss; useful context is mostly local.
+
+![CA image](Comparative%20Analysis/LvsV.png)
 
 ---
 
@@ -56,13 +54,11 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 ### Linux code embeddings
 
 **CW=3**
-![WE\_L\_CW3](WE_L_CW3.png)
 
 * Clear groupings: control tokens (`if/for/return`) vs function/identifier tokens (`main/sizeof/init`), and symbols.
 * Clusters are **tight** and role-consistent.
 
 **CW=5**
-![WE\_L\_CW5](WE_L_CW5.png)
 
 * Broader spread; more mixing between control/identifier regions.
 * **Interpretation:** Wider context injects variability; CW=3 gives crisper, role-aligned structure for code.
@@ -70,13 +66,11 @@ MLP language model (shared config across runs): embedding {32/64}, 1–2 hidden 
 ### Shakespeare embeddings
 
 **CW=3**
-![WE\_S\_CW3](WE_S_CW3.png)
 
 * Semantics emerge: `king–queen` (royalty), `he–she` (pronouns), `happy–sad` (emotion), `run–walk–fast/slow` (action/speed).
 * Nearest-neighbour relations are intuitive.
 
 **CW=5**
-![WE\_S\_CW5](WE_S_CW5.png)
 
 * Relations persist but clusters **spread**; neighbourhoods still meaningful.
 
